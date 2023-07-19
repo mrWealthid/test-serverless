@@ -19,6 +19,7 @@ const loanRouter = require('./routes/loanRoutes');
 
 const filepath = path.join(process.cwd(), 'public');
 
+const serverless = require('serverless-http');
 const app = express();
 
 //To trust proxies
@@ -109,4 +110,6 @@ app.all('*', (req, res, next) => {
 });
 
 app.use(globalErrorHandler);
-module.exports = app;
+
+module.exports.handler = serverless(app);
+
